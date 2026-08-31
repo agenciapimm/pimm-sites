@@ -1535,7 +1535,7 @@
  'id':'o'
 }
  ],
- 'dominio':'.pimm.com.br',
+ 'dominio':'',
  'editado':(GModalApproval.preferencias() ? true :false)
 });
 }
