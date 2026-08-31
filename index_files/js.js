@@ -1056,7 +1056,7 @@
  else{post['campos'][i] ={'id':id, 'titulo':titulo, 'valor':valor};}
 }else{
  if($(this).find('.gpc_campo').hasClass('telefone')){
- post['campos'][i] ={'id':id, 'titulo':titulo, 'valor':$(this).find('.gpc_campo').val(), 'tipo':'telefone'};
+ post['campos'][i] ={'id':id, 'titulo':titulo, 'valor':$(this).find('.gpc_campo').val().replace(/\D/g, ''), 'tipo':'telefone'};
 }else if( $(this).find('.gpc_campo').hasClass('telefone_ddi')){
  const countryData = phoneMaskGreat['#'+elemento_envio+'#'+id].getSelectedCountryData();
  post['campos'][i] ={'id':id, 'titulo':titulo, 'valor':`+${countryData.dialCode}${$(this).find('.gpc_campo').val()}`, 'tipo':'telefone'};
@@ -1083,7 +1083,7 @@
  AdicionarFilaGQA({
  
  'verbo' :'POST',
- 'url' :'https://n8n.pimm.com.br/webhook/form-main',
+ 'url' :'https://n8n.pimm.com.br/webhook-test/form-main',
  'uri' :JSON.stringify(post),
  'timeout' :10000,
  'prioridade' :'baixa',
@@ -2566,7 +2566,7 @@ function EnviarAjaxGQA(parametros){
  if (parametros.extensao){requisicao.responseType = parametros.extensao;}
  requisicao.withCredentials = true;
  requisicao.overrideMimeType("application/"+parametros.extensao);
- if (parametros.verbo == 'POST'){
+ if (parametros.verbo == 'POST' && !parametros.externo){
  requisicao.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 }
  if (parametros.externo){
